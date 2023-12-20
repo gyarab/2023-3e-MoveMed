@@ -13,7 +13,6 @@ import com.example.aplikaceprochronickpacienty.models.Message
 class ChatAdapter(private var activity: Activity, private var messageList: List<Message>) : RecyclerView.Adapter<ChatViewHolder>() {
 
     class ChatViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
         var messageReceive: TextView = itemView.findViewById(R.id.message_receive)
         var messageSend: TextView = itemView.findViewById(R.id.message_send)
     }
@@ -26,7 +25,6 @@ class ChatAdapter(private var activity: Activity, private var messageList: List<
     override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
         val message: String = messageList[position].message
         val isReceived: Boolean = messageList[position].isReceived
-
         if (isReceived) {
             holder.messageReceive.visibility = View.VISIBLE
             holder.messageSend.visibility = View.GONE
