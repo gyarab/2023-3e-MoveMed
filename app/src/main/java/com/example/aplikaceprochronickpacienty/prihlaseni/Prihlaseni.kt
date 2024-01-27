@@ -2,7 +2,6 @@ package com.example.aplikaceprochronickpacienty.prihlaseni
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.text.TextUtils
 import android.text.method.HideReturnsTransformationMethod
@@ -18,8 +17,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.example.aplikaceprochronickpacienty.R
-import com.example.aplikaceprochronickpacienty.internetPripojeni.Internet
-import com.example.aplikaceprochronickpacienty.internetPripojeni.InternetPripojeni
+import com.example.aplikaceprochronickpacienty.nastaveni.Internet
+import com.example.aplikaceprochronickpacienty.nastaveni.InternetPripojeni
 import com.example.aplikaceprochronickpacienty.navbar.Prehled
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -33,9 +32,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import java.io.File
-import java.io.InputStream
-import android.content.Context
 
 
 class Prihlaseni : AppCompatActivity() {
@@ -64,9 +60,6 @@ class Prihlaseni : AppCompatActivity() {
 
     // Kontrola účtu - výchozí či Google
     private var mapa: HashMap<String, Boolean> = HashMap()
-
-    val databazeFirebase = FirebaseDatabase.getInstance()
-    val referenceFirebase = databazeFirebase.getReference("users")
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -124,51 +117,31 @@ class Prihlaseni : AppCompatActivity() {
     /** Hlavní funkce pro přihlášení uživatele **/
     private fun prihlaseniUzivatele() {
 
-        val soubor = File(filesDir, "mapa.txt")
+        val databazeFirebase = FirebaseDatabase.getInstance()
+        val referenceFirebase = databazeFirebase.getReference("users")
 
         referenceFirebase.addListenerForSingleValueEvent(object : ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) {
 
                 for (uzivatelSnapshot in snapshot.children) {
+
                     val emaily = uzivatelSnapshot.child("email").getValue(String::class.java)
-                    val googleUcet = uzivatelSnapshot.child("googleUcet").getValue(Boolean::class.java)
+                    val googleUcet =
+                        uzivatelSnapshot.child("googleUcet").getValue(Boolean::class.java)
 
                     if (emaily != null && googleUcet != null) {
+
                         mapa.put(emaily, googleUcet)
+                        Log.d("MAPA", mapa.toString())
                     }
                 }
 
-                println(mapa)
-
-                val dataToWrite = mapa.toString()
-                soubor.writeText(dataToWrite)
-
-                println("Data written to file successfully.")
             }
 
             override fun onCancelled(error: DatabaseError) {
             }
         })
-
-        try {
-
-            val mapFromFile = soubor.readText()
-                .drop(1)
-                .dropLast(1)
-                .split(", ")
-                .associate {
-                    val (key, value) = it.split("=")
-                    key to value.toBoolean()
-                }
-
-            // přidání do mapy původní hodnoty z DB
-            mapa.putAll(mapFromFile)
-
-        } catch (e: Exception) {
-            println("Error reading from file: ${e.message}")
-            e.printStackTrace()
-        }
 
         val uzivatel = FirebaseAuth.getInstance().currentUser
 
@@ -225,7 +198,6 @@ class Prihlaseni : AppCompatActivity() {
         }
     }
 
-
     /** Přihlášení přes Google **/
     private fun vytvoreniZadostiGoogle() {
 
@@ -268,7 +240,6 @@ class Prihlaseni : AppCompatActivity() {
 
         }
     }
-
 
     /** Autentizace uživatele přes Firebase **/
     private fun firebaseAuthWithGoogle(account: GoogleSignInAccount) {
@@ -320,12 +291,14 @@ class Prihlaseni : AppCompatActivity() {
         }
     }
 
-    /** Aktuální motiv aplikace **/
     private fun getDarkMode(switchNazev:String) {
+
+        val databazeFirebase: FirebaseDatabase = FirebaseDatabase.getInstance()
+        val referenceFirebaseUzivatel: DatabaseReference = databazeFirebase.getReference("users")
 
         val uzivatel = FirebaseAuth.getInstance().currentUser!!
 
-        referenceFirebase.addListenerForSingleValueEvent(object : ValueEventListener {
+        referenceFirebaseUzivatel.addListenerForSingleValueEvent(object : ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) {
 
@@ -352,32 +325,23 @@ class Prihlaseni : AppCompatActivity() {
         val databazeFirebase = FirebaseDatabase.getInstance()
         val referenceFirebase = databazeFirebase.getReference("users")
 
-        // Pokud email již existuje
-        if (mapa.keys.contains(account.email)) {
+        val udajeUzivatele =
+            UdajeUzivatele(
+                account.displayName,
+                account.email,
+                account.givenName,
+                true,
+                true,
+                true,
+                "",
+                "",
+                0.0,
+                0,
+                0.0
+            )
 
-            return
-
-        } else {
-
-            val udajeUzivatele =
-                UdajeUzivatele(
-                    account.displayName,
-                    account.email,
-                    account.givenName,
-                    true,
-                    true,
-                    true,
-                    "",
-                    "",
-                    0,
-                    0.0,
-                    "",
-                    ""
-                )
-
-            // V databazi Firebase Realtime se vytvoří nový uživatel se údaji
-            account.displayName?.let { referenceFirebase.child(it).setValue(udajeUzivatele) }
-        }
+        // V databazi Firebase Realtime se vytvoří nový uživatel se údaji
+        account.displayName?.let { referenceFirebase.child(it).setValue(udajeUzivatele) }
     }
 
     /** Kontrola emailu - zda je validní **/
@@ -395,7 +359,7 @@ class Prihlaseni : AppCompatActivity() {
         if (!mapa.containsKey(email) && ucetGoogle == false) {
 
             if (editText != null) {
-                editText.error = "Nemáte zatím účet, zaregistrujte se"
+                editText.error = "Tento email není zaregistrovaný"
             }
 
         } else if (mapa.containsKey(email) && ucetGoogle == true) {
@@ -407,6 +371,7 @@ class Prihlaseni : AppCompatActivity() {
             )
                 .show()
 
+            prihlaseni_google_client.signOut()
         }
 
         return false
@@ -486,7 +451,7 @@ class Prihlaseni : AppCompatActivity() {
 
                     Toast.makeText(
                         this@Prihlaseni,
-                        "Nesprávný email nebo heslo",
+                        "Nesprávné heslo",
                         Toast.LENGTH_SHORT,
                     ).show()
                 }
