@@ -1,4 +1,4 @@
-package com.example.aplikaceprochronickpacienty.notifikace
+package com.example.aplikaceprochronickpacienty.Notifikace
 
 import android.app.NotificationManager
 import android.app.PendingIntent

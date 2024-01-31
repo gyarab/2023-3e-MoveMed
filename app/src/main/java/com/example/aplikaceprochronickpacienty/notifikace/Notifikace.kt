@@ -1,4 +1,4 @@
-package com.example.aplikaceprochronickpacienty.notifikace
+package com.example.aplikaceprochronickpacienty.Notifikace
 
 
 import android.app.NotificationManager
@@ -25,7 +25,6 @@ class Notifikace : BroadcastReceiver() {
 
         val aktivita = PendingIntent.getActivity(
             context, notifikaceID, prehledIntent,
-            PendingIntent.FLAG_IMMUTABLE or
             PendingIntent.FLAG_UPDATE_CURRENT)
 
         if (context != null && intent != null) {

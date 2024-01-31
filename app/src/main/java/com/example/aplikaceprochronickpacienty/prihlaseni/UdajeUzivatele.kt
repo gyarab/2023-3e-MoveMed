@@ -8,10 +8,10 @@ class UdajeUzivatele(var jmenoPrijmeni: String? = null,
                      var darkMode: Boolean,
                      var datumNarozeni: String? = null,
                      var vyska: String? = null,
+                     var vaha: Double,
                      var krokyCil: Int,
                      var vahaCil: Double,
-                     var profilovyObrazek: String,
-                     var nemoc: String) {
+                     var profilovyObrazek: String) {
 
 
 }
