@@ -52,6 +52,9 @@ interface UzivatelDao {
     @Query("UPDATE uzivatel_table SET WeightDayKG = :vaha WHERE SubjectId = :subjectId AND Date = :date")
     suspend fun updateWeight(subjectId: Int, date: String, vaha: Double): Int
 
+    @Query("SELECT EnergyIntakeDayKJ FROM uzivatel_table WHERE SubjectId = :subjectId AND Date = :date")
+    suspend fun getCalories(subjectId : Int, date : String): Double
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addUser(uzivatel: Uzivatel)
 
