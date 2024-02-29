@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
@@ -16,12 +15,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SwitchCompat
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.aplikaceprochronickpacienty.R
 import com.example.aplikaceprochronickpacienty.internetPripojeni.Internet
 import com.example.aplikaceprochronickpacienty.internetPripojeni.InternetPripojeni
-import com.example.aplikaceprochronickpacienty.navbar.Prehled
 import com.example.aplikaceprochronickpacienty.navbar.Ucet
-import com.example.aplikaceprochronickpacienty.roomDB.UzivatelDatabase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
@@ -29,7 +27,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import kotlinx.coroutines.runBlocking
 import java.util.Calendar
 
 class Nastaveni : AppCompatActivity() {
@@ -56,12 +53,6 @@ class Nastaveni : AppCompatActivity() {
     private lateinit var databazeFirebase: FirebaseDatabase
     private lateinit var referenceFirebaseUzivatel: DatabaseReference
 
-    // ROOM
-    val roomDatabase = UzivatelDatabase.getDatabase(this)
-
-    // Aktivní uživatel
-    private val aktivniUzivatel = 1648
-
     // Uživatel Firebase Auth
     private lateinit var uzivatel: FirebaseUser
 
@@ -72,10 +63,7 @@ class Nastaveni : AppCompatActivity() {
     private lateinit var nastaveni_vyber_nemoci: AutoCompleteTextView
 
     // Údaje uživatele
-    private val udaje = listOf("krokyCil", "vahaCil", "datumNarozeni", "vyska", "vaha", "nemoc")
-
-    // Aktuální nemoc
-    private var nemoc: String = ""
+    private val udaje = listOf("krokyCil", "vahaCil", "datumNarozeni", "vyska", "vaha")
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -87,22 +75,14 @@ class Nastaveni : AppCompatActivity() {
         // Kontrola připojení
         val pripojeni = InternetPripojeni()
 
+        nastaveni_vyber_nemoci = findViewById(R.id.nastaveni_vyber_nemoci)
+
+        val nemoci = resources.getStringArray(R.array.nastaveni_vyber_nemoci)
+        val arrayAdapter = ArrayAdapter(this, R.layout.dropdown_item,nemoci)
+
+        nastaveni_vyber_nemoci.setAdapter(arrayAdapter)
+
         if (pripojeni.checkInternetConnection(this)) {
-
-            // Chronické onemocnění
-            nastaveni_vyber_nemoci = findViewById(R.id.autoCompleteTextView)
-
-            // Výběr nemocí
-            val nemoci = resources.getStringArray(R.array.nastaveni_vyber_nemoci)
-            val arrayAdapter = ArrayAdapter(this, R.layout.dropdown_item, nemoci)
-
-            nastaveni_vyber_nemoci.setAdapter(arrayAdapter)
-
-            // Získání aktuální nemoci uživatele
-            nastaveni_vyber_nemoci.setOnItemClickListener { parent, view, position, id ->
-
-                nemoc = parent.getItemAtPosition(position).toString()
-            }
 
             // Firebase Reference
             databazeFirebase = FirebaseDatabase.getInstance()
@@ -257,16 +237,6 @@ class Nastaveni : AppCompatActivity() {
 
     private fun getUserDataDB(nazevInfo: String) {
 
-        runBlocking {
-
-            nastaveni_vaha_udaje_editext = findViewById(R.id.nastaveni_vaha_udaje_editext)
-
-            val vaha = roomDatabase.uzivatelDao().getWeight(aktivniUzivatel)
-
-            println("VAHA je $vaha")
-            nastaveni_vaha_udaje_editext.hint = vaha.toString()
-        }
-
         referenceFirebaseUzivatel.addListenerForSingleValueEvent(object : ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -305,10 +275,9 @@ class Nastaveni : AppCompatActivity() {
 
                             }
 
-                            "nemoc" -> {
+                            "vaha" -> {
 
-                                nastaveni_vyber_nemoci.setText(uzivatelUdaje, false)
-
+                                nastaveni_vaha_udaje_editext.hint = uzivatelUdaje
                             }
                         }
                     }
@@ -390,29 +359,7 @@ class Nastaveni : AppCompatActivity() {
             val vahaCil = nastaveni_vaha_editext.text.toString()
             val datumNarozeni = nastaveni_datum_narozeni_udaje_textview.text.toString()
             val vyska = nastaveni_vyska_udaje_editext.text.toString()
-            val nemoc = nastaveni_vyber_nemoci.text.toString()
-
-            val datum = Prehled().dnesniDatum()
-
-            println(nastaveni_vaha_udaje_editext.text)
-
-            // Obnovení váhy v DB ROOM
-            runBlocking {
-
-                try {
-
-                    roomDatabase.uzivatelDao()
-                        .updateWeight(
-                            aktivniUzivatel,
-                            datum,
-                            nastaveni_vaha_udaje_editext.text.toString().toDouble()
-                        )
-
-                } catch (e: NumberFormatException) {
-
-                    println("Váha nebyla změněna")
-                }
-            }
+            val vaha = nastaveni_vaha_udaje_editext.text.toString()
 
             // Přidání informací do komponenty HashMap
             val mapa = hashMapOf<String, String>()
@@ -420,7 +367,7 @@ class Nastaveni : AppCompatActivity() {
             mapa["vahaCil"] = vahaCil
             mapa["datumNarozeni"] = datumNarozeni
             mapa["vyska"] = vyska
-            mapa["nemoc"] = nemoc
+            mapa["vaha"] = vaha
 
             // Přidání nových dat uživatele
             uzivatel.displayName?.let {
