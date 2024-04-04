@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:state_checked="true">
+
+        <shape
+            android:shape="rectangle">
+
+            <gradient
+                android:angle="0"
+                android:centerColor="@color/neon_ruzova"
+                android:endColor="@color/modro_fialova"
+                android:startColor="@color/modro_fialova"
+                android:type="linear" />
+
+<!--            <solid android:color="@color/modro_fialova" />-->
+
+            <corners android:radius="100dp" />
+
+        </shape>
+
+    </item>
+
+    <item
+        android:state_checked="false">
+
+        <shape
+            android:shape="rectangle">
+
+            <solid android:color="#c9cdde" />
+
+            <corners android:radius="100dp" />
+
+        </shape>
+
+    </item>
+
+</selector>

@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tmave_fialova"
+    tools:context=".navbar.Prehled">
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="MissingConstraints">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <app.futured.donut.DonutProgressView
+                android:id="@+id/prehled_donut_bar"
+                android:layout_width="325dp"
+                android:layout_height="325dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/prehled_pozadi_graf"
+                android:padding="25dp"
+                app:donut_bgLineColor="@color/tmave_fialova"
+                app:donut_gapAngle="270"
+                app:donut_gapWidth="20"
+                app:donut_strokeWidth="30dp"
+                app:donut_animateChanges="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageButton
+                android:id="@+id/prehled_edit_kroky"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_edit"
+                android:padding="5dp"
+                android:background="@drawable/chat_pozadi_kruh_white"
+                android:layout_margin="5dp"
+                android:contentDescription="Upravit kroky"
+                app:layout_constraintEnd_toEndOf="@+id/prehled_donut_bar"
+                app:layout_constraintTop_toTopOf="@+id/prehled_donut_bar" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@+id/prehled_donut_bar"
+                app:layout_constraintEnd_toEndOf="@+id/prehled_donut_bar"
+                app:layout_constraintStart_toStartOf="@+id/prehled_donut_bar"
+                app:layout_constraintTop_toTopOf="@+id/prehled_donut_bar">
+
+                <TextView
+                    android:id="@+id/prehled_pocet_kroku"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="@null"
+                    android:textAlignment="center"
+                    android:textColor="@color/neon_zluta"
+                    android:textSize="50sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/prehled_donut_bar"
+                    app:layout_constraintEnd_toEndOf="@+id/prehled_donut_bar"
+                    app:layout_constraintStart_toStartOf="@+id/prehled_donut_bar"
+                    app:layout_constraintTop_toTopOf="@+id/prehled_donut_bar" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/prehled_ic_steps"
+                    android:scaleX="1.25"
+                    android:scaleY="1.25"
+                    android:contentDescription="@string/kroky"
+                    app:layout_constraintBottom_toBottomOf="@+id/prehled_donut_bar"
+                    app:layout_constraintEnd_toEndOf="@+id/prehled_donut_bar"
+                    app:layout_constraintStart_toStartOf="@+id/prehled_donut_bar"
+                    app:layout_constraintTop_toBottomOf="@+id/prehled_pocet_kroku" />
+
+                <TextView
+                    android:id="@+id/prehled_zbyvajici_kroky"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans"
+                    android:text="@string/priklad_zbyvajicich_kroku"
+                    android:textAlignment="center"
+                    android:textColor="@color/neon_zluta"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/barChartData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="@string/kalorie_a_kroky"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:layout_marginTop="64dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/prehled_donut_bar" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/vyber_togglebutton_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/prehled_donut_bar"
+                app:layout_constraintStart_toStartOf="@+id/prehled_donut_bar"
+                app:layout_constraintTop_toBottomOf="@+id/barChartData"
+                app:strokeColor="@android:color/transparent"
+                app:strokeWidth="0dp">
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/prehled_tabLayout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:backgroundTint="@android:color/white"
+                    app:tabBackground="@drawable/prehled_toggle_btn_selector"
+                    app:tabGravity="fill"
+                    app:tabIndicatorColor="@android:color/transparent"
+                    app:tabIndicatorHeight="0dp"
+                    app:tabMode="fixed"
+                    app:tabRippleColor="@android:color/transparent"
+                    app:tabSelectedTextColor="@android:color/white"
+                    app:tabTextColor="@android:color/black">
+
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/kalorie" />
+
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Kroky" />
+
+                </com.google.android.material.tabs.TabLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.db.williamchart.view.BarChartView
+                android:id="@+id/prehled_barChart"
+                android:background="@drawable/prehled_pozadi_graf"
+                android:padding="15dp"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="32dp"
+                app:chart_axis="xy"
+                app:chart_barsColor="@color/neon_ruzova"
+                app:chart_barsRadius="4dp"
+                app:chart_labelsColor="@color/neon_ruzova"
+                app:chart_labelsSize="15sp"
+                app:chart_spacing="10dp"
+                app:layout_constraintEnd_toEndOf="@+id/prehled_donut_bar"
+                app:layout_constraintStart_toStartOf="@+id/prehled_donut_bar"
+                app:layout_constraintTop_toBottomOf="@id/vyber_togglebutton_2" />
+
+            <ImageButton
+                android:id="@+id/prehled_edit_kalorie"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_edit"
+                android:padding="5dp"
+                android:background="@drawable/chat_pozadi_kruh_white"
+                android:layout_margin="5dp"
+                android:contentDescription="Upravit kroky"
+                app:layout_constraintEnd_toEndOf="@+id/prehled_barChart"
+                app:layout_constraintTop_toTopOf="@+id/prehled_barChart" />
+
+
+            <TextView
+                android:id="@+id/lineChartData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="@string/prubeh_vahy"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:layout_marginTop="64dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/prehled_barChart" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/vyber_togglebutton_3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintBottom_toTopOf="@+id/prehled_lineChart"
+                app:layout_constraintEnd_toEndOf="@+id/prehled_donut_bar"
+                app:layout_constraintStart_toStartOf="@+id/prehled_donut_bar"
+                app:layout_constraintTop_toBottomOf="@+id/lineChartData"
+                app:strokeColor="@android:color/transparent"
+                app:strokeWidth="0dp">
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/prehled_tabLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:backgroundTint="@android:color/white"
+                    app:tabBackground="@drawable/prehled_toggle_btn_selector"
+                    app:tabGravity="fill"
+                    app:tabIndicatorColor="@android:color/transparent"
+                    app:tabIndicatorHeight="0dp"
+                    app:tabMode="fixed"
+                    app:tabRippleColor="@android:color/transparent"
+                    app:tabSelectedTextColor="@android:color/white"
+                    app:tabTextColor="@android:color/black">
+
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tyden" />
+
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/mesic" />
+
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/rok" />
+
+                </com.google.android.material.tabs.TabLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+
+            <com.db.williamchart.view.LineChartView
+                android:id="@+id/prehled_lineChart"
+                android:background="@drawable/prehled_pozadi_graf"
+                android:padding="15dp"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="32dp"
+                app:chart_axis="y"
+                app:chart_gridEffect="dotted"
+                app:chart_labelsColor="@color/neon_modra"
+                app:chart_labelsSize="10sp"
+                app:chart_lineColor="@color/neon_modra"
+                app:chart_lineThickness="1dp"
+                app:chart_smoothLine="true"
+                app:layout_constraintEnd_toEndOf="@+id/prehled_donut_bar"
+                app:layout_constraintStart_toStartOf="@+id/prehled_donut_bar"
+                app:layout_constraintTop_toBottomOf="@+id/vyber_togglebutton_3">
+
+            </com.db.williamchart.view.LineChartView>
+
+            <ImageButton
+                android:id="@+id/prehled_edit_vaha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_edit"
+                android:padding="5dp"
+                android:background="@drawable/chat_pozadi_kruh_white"
+                android:layout_margin="5dp"
+                android:contentDescription="Upravit kroky"
+                app:layout_constraintEnd_toEndOf="@+id/prehled_lineChart"
+                app:layout_constraintTop_toTopOf="@+id/prehled_lineChart" />
+
+            <TextView
+                android:id="@+id/prehled_souradnice_linearChart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/informace_o_grafu"
+                android:layout_marginTop="16dp"
+                android:textSize="20sp"
+                android:textColor="@color/neon_zluta"
+                app:layout_constraintEnd_toEndOf="@+id/prehled_lineChart"
+                app:layout_constraintStart_toStartOf="@+id/prehled_lineChart"
+                app:layout_constraintTop_toBottomOf="@+id/prehled_lineChart" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="64dp"
+                android:text=""
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                app:layout_constraintEnd_toEndOf="@+id/prehled_souradnice_linearChart"
+                app:layout_constraintStart_toStartOf="@+id/prehled_souradnice_linearChart"
+                app:layout_constraintTop_toBottomOf="@+id/prehled_souradnice_linearChart" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        style="@style/Navbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

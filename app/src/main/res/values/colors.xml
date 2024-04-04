@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="fialova">#673AB7</color>
+    <color name="seda">#eeeced</color>
+    <color name="tmave_seda">#757575</color>
+    <color name="modro_fialova">#6200ee</color>
+    <color name="tmave_fialova">#1f002c</color>
+    <color name="neon_fialova">#BC13FE</color>
+    <color name="neon_modra">#09dbd0</color>
+    <color name="neon_ruzova">#ff30a2</color>
+    <color name="neon_zluta">#ffc412</color>
+    <color name="black_shadow">#171717</color>
+    <color name="rude_cervena">#b20402</color>
+    <color name="modro_ruzova">#B718C2</color>
+
+</resources>

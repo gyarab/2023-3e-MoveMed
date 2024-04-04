@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/UcetBackground"
+    tools:context=".navbar.Ucet">
+
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/profil_uzivatele"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toTopOf="@+id/bottom_nav"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="225dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/ucet_pozadi_top"
+                    app:backgroundTint="@null"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0">
+
+                </View>
+
+                <ImageView
+                    android:id="@+id/ucet_select_icon_button"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/ucet_ikona_photo"
+                    android:contentDescription="@string/vyberte_obrazek"
+                    android:elevation="10dp"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_photo"
+                    app:layout_constraintBottom_toBottomOf="@id/ucet_icon"
+                    app:layout_constraintEnd_toEndOf="@id/ucet_icon"
+                    app:tint="@color/white" />
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/ucet_icon"
+                    android:layout_width="125sp"
+                    android:layout_height="125sp"
+                    android:src="@drawable/ucet_ikona_account"
+                    android:contentDescription="@string/profilov_obrazek_uzivatele"
+                    app:backgroundTint="@null"
+                    app:layout_constraintBottom_toBottomOf="@+id/view"
+                    app:layout_constraintEnd_toEndOf="@+id/view"
+                    app:layout_constraintStart_toStartOf="@+id/view"
+                    app:layout_constraintTop_toTopOf="@+id/view"
+                    app:riv_corner_radius="1000dp"
+                    />
+
+                <TextView
+                    android:id="@+id/ucet_jmeno_uzivatele"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/jmeno_prijmeni"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="25sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/view"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:orientation="vertical"
+                    style="@style/UcetPozadiBody"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view">
+
+                    <TableLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginEnd="16dp"
+                            style="@style/UcetPozadiBodyZacatek">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginBottom="8dp"
+                                android:text="@string/email"
+                                style="@style/UcetTextColor"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+
+                            <TextView
+                                android:id="@+id/ucet_email"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginEnd="24dp"
+                                android:layout_marginBottom="8dp"
+                                android:text="@string/placeholder_email"
+                                android:textColor="@color/tmave_seda"
+                                android:textSize="15sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="16dp"
+                            style="@style/UcetTableBody">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"
+                                android:text="@string/datum_narozeni"
+                                style="@style/UcetTextColor"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/ucet_rok_narozeni"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"
+                                android:text="@string/placeholder_datum_narozeni"
+                                android:textColor="@color/tmave_seda"
+                                android:textSize="15sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="16dp"
+                            style="@style/UcetTableBody">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"
+                                android:text="@string/vyska"
+                                style="@style/UcetTextColor"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/ucet_vyska"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"
+                                android:text="@string/placeholder_cm"
+                                android:textColor="@color/tmave_seda"
+                                android:textSize="15sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="16dp"
+                            style="@style/UcetTableBody">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"
+                                android:text="@string/vaha"
+                                style="@style/UcetTextColor"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/ucet_vaha"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="23dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"
+                                android:text="@string/placeholder_kg"
+                                android:textColor="@color/tmave_seda"
+                                android:textSize="15sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="16dp"
+                            android:orientation="horizontal"
+                            style="@style/UcetTableEnd">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="12dp"
+                                android:text="@string/vek"
+                                style="@style/UcetTextColor"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/ucet_vek"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="31dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="12dp"
+                                android:text="@string/placeholder_let"
+                                android:textColor="@color/tmave_seda"
+                                android:textSize="15sp" />
+
+                        </LinearLayout>
+
+                    </TableLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:orientation="vertical">
+
+
+                        <TextView
+                            android:id="@+id/ucet_nastaveni"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            style="@style/UcetTableNastaveni"
+                            android:drawablePadding="16dp"
+                            android:padding="8dp"
+                            android:text="@string/nastaveni"
+                            android:textSize="17sp"
+                            android:textStyle="bold"
+                            app:drawableStartCompat="@drawable/ic_settings" />
+
+                        <TextView
+                            android:id="@+id/ucet_o_aplikaci"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            style="@style/UcetTableNastaveni"
+                            android:drawablePadding="16dp"
+                            android:padding="8dp"
+                            android:text="@string/o_aplikaci"
+                            android:textSize="17sp"
+                            android:textStyle="bold"
+                            app:drawableStartCompat="@drawable/ic_info" />
+
+
+                    </LinearLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <Button
+                            android:id="@+id/ucet_odhlasit_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginBottom="8dp"
+                            android:text="@string/odhlasit_se"
+                            android:textColor="@color/white"
+                            app:backgroundTint="#e92857"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                        </Button>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textAlignment="center"
+                            android:textColor="@color/white"
+                            android:textSize="25sp"
+                            app:layout_constraintTop_toBottomOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        style="@style/Navbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profil_uzivatele"
+        app:menu="@menu/bottom_nav_menu"
+        tools:ignore="NotSibling" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
