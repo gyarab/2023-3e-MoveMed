@@ -39,7 +39,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 
-
+// Tato třída zobrazuje uživatelský profil a jeho poskytnuté informace
 class Ucet : AppCompatActivity() {
 
     // Nastavení
