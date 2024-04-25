@@ -12,7 +12,7 @@ import androidx.appcompat.widget.AppCompatButton
 import com.example.aplikaceprochronickpacienty.R
 import com.example.aplikaceprochronickpacienty.prihlaseni.Prihlaseni
 
-
+/** Třída Internet spustí v případě, kdy uživatel nemá k dispozici internet **/
 class Internet : AppCompatActivity() {
 
     private lateinit var internet_button: AppCompatButton
