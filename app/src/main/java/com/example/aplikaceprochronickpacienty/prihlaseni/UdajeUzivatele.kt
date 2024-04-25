@@ -1,5 +1,6 @@
 package com.example.aplikaceprochronickpacienty.prihlaseni
 
+/** Jednotlivé údaje o uživateli, které se ukládají do databáze **/
 class UdajeUzivatele(var jmenoPrijmeni: String? = null,
                      var email: String? = null,
                      var uzivatelskeJmeno: String? = null,
