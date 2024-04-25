@@ -207,6 +207,7 @@ class Nastaveni : AppCompatActivity() {
         }
     }
 
+    // Kontrorla zda uživatel má zapnutá oznámení či nikoliv
     private fun oznameniDB(uzivatel: FirebaseUser?) {
 
         if (uzivatel != null) {
@@ -218,6 +219,7 @@ class Nastaveni : AppCompatActivity() {
         }
     }
 
+    // Kontrorla zda uživatel má zapnutý DarkMode či nikoliv
     private fun darkModeDB(uzivatel: FirebaseUser?) {
 
         if (uzivatel != null) {
@@ -229,6 +231,7 @@ class Nastaveni : AppCompatActivity() {
         }
     }
 
+    // V případě, že uživatel změní motiv aplikace
     private fun getSwitchDB(switchNazev: String, switchCompat: SwitchCompat) {
 
         referenceFirebaseUzivatel.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -255,6 +258,7 @@ class Nastaveni : AppCompatActivity() {
         })
     }
 
+    // Získání dat o uživateli z databáze
     private fun getUserDataDB(nazevInfo: String) {
 
         runBlocking {
@@ -320,6 +324,7 @@ class Nastaveni : AppCompatActivity() {
         })
     }
 
+    // Výběr narození uživatele
     @SuppressLint("SetTextI18n")
     private fun setBithdayUser(textView: TextView) {
 
