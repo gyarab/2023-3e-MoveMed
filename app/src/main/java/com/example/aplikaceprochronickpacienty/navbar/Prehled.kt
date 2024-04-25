@@ -69,7 +69,7 @@ import java.util.GregorianCalendar
 import java.util.Locale
 import kotlin.math.roundToInt
 
-
+// Třída pro zobrazení grafů uživatele za dané časové období
 class Prehled : AppCompatActivity(), SensorEventListener {
 
     // Arraylist pro odstranění odchylky
