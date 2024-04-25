@@ -10,6 +10,10 @@ import com.example.aplikaceprochronickpacienty.R
 import com.example.aplikaceprochronickpacienty.adapters.ChatAdapter.ChatViewHolder
 import com.example.aplikaceprochronickpacienty.models.Message
 
+/** Citace třídy ChatAdapter, která zobrazuje zprávy v konverzaci mezi uživatelem a chatbotem
+    Níže uvedený kód je převzat z tohoto zdroje.
+    Zdroj: https://github.com/veeyaarVR/dialogflow_android_kotlin/blob/master/app/src/main/java/com/vignesh/chatbotkotlin/adapters/ChatAdapter.kt
+**/
 class ChatAdapter(private var activity: Activity, private var messageList: List<Message>) : RecyclerView.Adapter<ChatViewHolder>() {
 
     class ChatViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
