@@ -18,7 +18,7 @@ import com.google.firebase.database.FirebaseDatabase
 import fr.tvbarthel.lib.blurdialogfragment.SupportBlurDialogFragment
 import kotlinx.coroutines.runBlocking
 
-
+/** Třída slouží k úpravě uživatelských údajů podle potřeby. Její komponenty budou použity ve scéně `Prehled.kt`. **/
 class UpravaUdaju : SupportBlurDialogFragment() {
 
     private lateinit var fragment_nadpis: TextView
