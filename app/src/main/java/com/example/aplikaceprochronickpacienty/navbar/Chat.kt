@@ -75,7 +75,11 @@ import java.util.GregorianCalendar
 import java.util.UUID
 import java.util.concurrent.TimeUnit
 
-
+/** Třída Chat slouží ke komunikaci mezi uživatelem a chatbotem 
+    Metody (addMessageToList, setUpBot, sendMessageToBot, sendMessageInBg) byly převzány z tohoto zdroje.
+    Nicméně ve třídě Chat byly všechny citované metody přepracovány tak, aby plně odpovídaly potřebám našeho chatbota. 
+    Jinými slovy, kód těchto metod neodpovídá originálu, avšak názvy metod zůstaly stejné.
+    Zdroj: https://github.com/veeyaarVR/dialogflow_android_kotlin/blob/master/app/src/main/java/com/vignesh/chatbotkotlin/MainActivity.kt **/
 class Chat : AppCompatActivity() {
 
     private var messageList: ArrayList<Message> = ArrayList()
